@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cell Homeostasis Virtual Lab</title>
+<style>
+:root{--ink:#243342;--blue:#dfeaf6;--green:#e7f0dd;--accent:#466b8e;--paper:#fff;--bg:#f5f7fa}
+*{box-sizing:border-box} body{font-family:Arial,Helvetica,sans-serif;margin:0;background:var(--bg);color:var(--ink);line-height:1.45}
+main{max-width:960px;margin:auto;padding:28px 18px 60px}.card{background:var(--paper);border:1px solid #d9e0e7;border-radius:14px;padding:22px;margin:18px 0;box-shadow:0 2px 8px #0000000d}
+h1{margin:.1em 0;color:#20384e} h2{color:#355b7d} .note{background:#eef5fb;border-left:5px solid var(--accent);padding:12px 14px;border-radius:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.beaker{border:2px solid #7e9bb5;border-top:none;border-radius:0 0 18px 18px;min-height:190px;padding:12px;text-align:center;background:linear-gradient(#fff 22%,#eaf6ff 22%)}
+.bag{margin:34px auto 8px;width:78px;height:88px;border:2px dashed #7c6b4e;border-radius:12px 12px 28px 28px;background:#fff8d8;display:flex;align-items:center;justify-content:center;font-weight:bold}
+button{background:#355f84;color:white;border:0;border-radius:8px;padding:10px 15px;font-weight:bold;cursor:pointer} button.secondary{background:#687887} button:disabled{opacity:.5;cursor:not-allowed}
+input,select{padding:8px;border:1px solid #aebac5;border-radius:6px;max-width:100%}.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.hidden{display:none}.result{font-weight:bold;margin-top:10px}.good{color:#2f6d3a}.try{color:#9a4b20}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{border:1px solid #9aa8b5;padding:7px;text-align:center}th{background:var(--blue)}td:first-child{background:var(--green);font-weight:bold;text-align:left}
+.progress{height:12px;background:#e4e8ec;border-radius:8px;overflow:hidden}.bar{height:100%;width:0;background:#668caf;transition:width 2s linear}
+.small{font-size:.9em;color:#53606b}.footer{text-align:center;color:#687887;font-size:.85em;margin-top:30px}@media print{button,.interactive{display:none}body{background:#fff}.card{box-shadow:none}}
+</style></head>
+<body><main>
+<h1>Cell Homeostasis Virtual Lab</h1>
+<p><strong>Purpose:</strong> To observe cell homeostasis at work by modeling a cell with dialysis tubing placed in solutions containing different concentrations of sugar.</p>
+<div class="note"><strong>Use this simulation with your Cell Homeostasis Lab worksheet.</strong> Record information on your worksheet as you move through each step. Do not skip ahead—the goal is to make predictions before seeing the results.</div>
+
+<section class="card"><h2>1. Understand the Model</h2>
+<p>Dialysis tubing is selectively permeable, so it can model a cell membrane. In this investigation, the liquid <strong>inside the dialysis tubing represents the fluid inside a cell</strong>, while the liquid <strong>in the beaker represents the environment outside the cell</strong>.</p>
+<p><strong>Beaker A</strong> is the control: there is no sugar inside or outside the dialysis tube.</p>
+<div class="row interactive"><label>When the sugar concentration is higher outside the “cell,” water should move: <select id="concept"><option value="">Choose…</option><option>into the cell</option><option>out of the cell</option></select></label><button onclick="checkConcept()">Check</button></div><div id="conceptMsg" class="result"></div>
+</section>
+
+<section class="card"><h2>2. Experimental Setup</h2><p>Sketch Beakers A–E on your worksheet and label the sugar concentration inside and outside each dialysis tube.</p>
+<div class="grid">
+<div class="beaker"><strong>A</strong><div>Beaker: 0% sugar</div><div class="bag">Tube<br>0%</div><small>Control</small></div>
+<div class="beaker"><strong>B</strong><div>Beaker: 0% sugar</div><div class="bag">Tube<br>10%</div></div>
+<div class="beaker"><strong>C</strong><div>Beaker: 5% sugar</div><div class="bag">Tube<br>10%</div></div>
+<div class="beaker"><strong>D</strong><div>Beaker: 10% sugar</div><div class="bag">Tube<br>10%</div></div>
+<div class="beaker"><strong>E</strong><div>Beaker: 15% sugar</div><div class="bag">Tube<br>10%</div></div>
+</div>
+<p class="small">The beaker solutions use the same concentration pattern as the original ESC4 activity. Record the solution percentages in your Results Table.</p></section>
+
+<section class="card"><h2>3. Record Initial Masses</h2><p>Before the experiment begins, each dialysis tube is weighed. Record these masses on your worksheet.</p>
+<table><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr><tr><td>Initial mass (g)</td><td>17.59</td><td>8.75</td><td>11.24</td><td>10.71</td><td>18.05</td></tr></table>
+<h3>Make a prediction</h3><p>For each tube, predict whether it will gain mass, lose mass, or remain about the same. Think about where water will move by osmosis.</p>
+<div class="row interactive"><label>B: <select><option>gain</option><option>lose</option><option>same</option></select></label><label>C: <select><option>gain</option><option>lose</option><option>same</option></select></label><label>D: <select><option>gain</option><option>lose</option><option>same</option></select></label><label>E: <select><option>gain</option><option>lose</option><option>same</option></select></label></div>
+</section>
+
+<section class="card"><h2>4. Run the Experiment</h2><p>The dialysis tubes are placed in their beakers for 24 hours. Click the button to simulate the passage of time.</p>
+<div class="progress"><div id="bar" class="bar"></div></div><p id="timeText">0 hours</p><button id="runBtn" onclick="runLab()">Begin 24-hour experiment</button>
+<div id="reveal" class="hidden"><h3>24 hours later…</h3><p>Each tube is removed, gently dried, and weighed again. Record the final masses. Then calculate the <strong>change in mass</strong> yourself on your worksheet.</p>
+<table><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr><tr><td>Final mass (g)</td><td>17.66</td><td>10.40</td><td>12.10</td><td>10.57</td><td>15.60</td></tr></table></div>
+</section>
+
+<section id="analysis" class="card hidden"><h2>5. Analyze What Happened</h2><p>Use the data you recorded to complete the Data Analysis section of your worksheet. Before you finish, check your reasoning with these prompts.</p>
+<div class="row interactive"><label>Which setup was closest to isotonic? <select id="iso"><option value="">Choose…</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></label><button onclick="checkIso()">Check</button></div><div id="isoMsg" class="result"></div>
+<p><strong>Think about:</strong> Why did B and C gain mass? Why did E lose mass? Why did D have very little change? Relate each observation to the direction of water movement across the selectively permeable membrane.</p>
+<div class="note"><strong>Finish your worksheet:</strong> Identify the independent and dependent variables, list four controlled variables, classify the solutions as hypertonic/isotonic/hypotonic, and explain the tube(s) with little or no mass change.</div>
+</section>
+<div class="footer">Cell Homeostasis Virtual Lab • replacement activity designed to accompany the existing student worksheet</div>
+</main>
+<script>
+function checkConcept(){let v=document.getElementById('concept').value,m=document.getElementById('conceptMsg'); if(!v){m.textContent='Choose an answer first.';m.className='result try'}else if(v==='out of the cell'){m.textContent='Correct. Water moves toward the side with the higher solute concentration.';m.className='result good'}else{m.textContent='Try again. Compare the water concentration on the two sides of the membrane.';m.className='result try'}}
+function runLab(){let b=document.getElementById('bar'),t=document.getElementById('timeText'),btn=document.getElementById('runBtn');btn.disabled=true;b.style.width='100%';let h=0;let timer=setInterval(()=>{h+=4;t.textContent=Math.min(h,24)+' hours';if(h>=24){clearInterval(timer);document.getElementById('reveal').classList.remove('hidden');document.getElementById('analysis').classList.remove('hidden');btn.textContent='Experiment complete';}},330)}
+function checkIso(){let v=document.getElementById('iso').value,m=document.getElementById('isoMsg');if(!v){m.textContent='Choose an answer first.';m.className='result try'}else if(v==='D'){m.textContent='Yes. Inside and outside were both 10% sugar, so there was little net water movement.';m.className='result good'}else{m.textContent='Look for the setup where the sugar concentration was equal inside and outside the tube.';m.className='result try'}}
+</script></body></html>
